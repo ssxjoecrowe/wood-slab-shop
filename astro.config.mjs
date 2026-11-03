@@ -4,7 +4,7 @@ import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
   site: 'https://wood-slab-shop.pages.dev',
-  output: 'static',
+  output: 'hybrid',
   adapter: cloudflare({
     platformProxy: {
       enabled: true,
