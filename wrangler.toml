@@ -1,16 +1,16 @@
 name = "wood-slab-shop"
 main = "src/worker/index.ts"
-compatibility_date = "2024-01-01"
+compatibility_date = "2024-11-03"
 compatibility_flags = ["nodejs_compat"]
 
 [assets]
-directory = "./dist"
+directory = "dist"
 binding = "ASSETS"
 
 [[kv_namespaces]]
 binding = "INQUIRIES_KV"
-id = "your-kv-namespace-id"
-preview_id = "your-preview-kv-namespace-id"
+id = "fe4f90dd4c2b49c4b044bb8cdf80d6ca"
+preview_id = "cc82aad61688472d8945112b99d2d469"
 
 [vars]
 ADMIN_PASSWORD = "changeme"
