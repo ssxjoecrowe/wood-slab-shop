@@ -1,0 +1,48 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  ctaText?: string;
+  ctaHref?: string;
+}
+const {
+  title = 'Premium Wood Slabs for Master Craftspeople',
+  subtitle = 'Curated selection of kiln-dried Black Walnut, White Oak, Maple, Cherry, and exotic species. Sustainably sourced, ready for your next masterpiece.',
+  ctaText = 'Browse Slabs',
+  ctaHref = '/slabs',
+} = Astro.props;
+---
+
+<section class="relative min-h-[70vh] sm:min-h-[80vh] lg:min-h-[90vh] flex items-center justify-center overflow-hidden bg-wood-50" aria-labelledby="hero-title">
+  <div class="absolute inset-0 bg-[url('/images/wood-grain.svg')] bg-center bg-cover opacity-5" aria-hidden="true" />
+
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-wood-50/50 to-wood-50" aria-hidden="true" />
+
+  <div class="container-custom relative z-10 py-20">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 id="hero-title" class="font-display font-medium text-display-xl sm:text-display-lg lg:text-display-xl text-slate-900 mb-6 animate-fade-in text-balance">
+        {title}
+      </h1>
+      <p class="text-lg sm:text-xl text-slate-600 mb-10 max-w-3xl mx-auto leading-relaxed animate-slide-up" style="animation-delay: 100ms;">
+        {subtitle}
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up" style="animation-delay: 200ms;">
+        <a href={ctaHref} class="btn-primary w-full sm:w-auto text-lg px-10 py-4">
+          {ctaText}
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+        <a href="/about" class="btn-outline w-full sm:w-auto text-lg px-10 py-4">
+          Our Story
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce" aria-hidden="true">
+    <svg class="w-6 h-6 text-wood-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+    </svg>
+  </div>
+</section>

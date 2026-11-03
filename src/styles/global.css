@@ -1,0 +1,134 @@
+@import "tailwindcss";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/playfair-display/400.css";
+@import "@fontsource/playfair-display/500.css";
+@import "@fontsource/playfair-display/600.css";
+@import "@fontsource/playfair-display/700.css";
+
+@theme {
+  --color-wood-50: #fdf8f3;
+  --color-wood-100: #faf0e6;
+  --color-wood-200: #f3e1d1;
+  --color-wood-300: #e6c9b0;
+  --color-wood-400: #d4a884;
+  --color-wood-500: #c18a61;
+  --color-wood-600: #b07350;
+  --color-wood-700: #925c41;
+  --color-wood-800: #784b38;
+  --color-wood-900: #624031;
+  --color-wood-950: #331f17;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-wood-50 text-slate-900 font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-medium text-slate-900 tracking-tight;
+  }
+
+  h1 { @apply text-display-xl; }
+  h2 { @apply text-display-lg; }
+  h3 { @apply text-display-md; }
+  h4 { @apply text-display-sm; }
+
+  ::selection {
+    @apply bg-wood-300 text-wood-950;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-wood-500 ring-offset-2 ring-offset-wood-50;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn bg-wood-700 text-white hover:bg-wood-800 active:bg-wood-900 focus-visible:ring-wood-700 shadow-wood;
+  }
+
+  .btn-secondary {
+    @apply btn bg-white text-wood-700 border border-wood-300 hover:bg-wood-50 active:bg-wood-100 focus-visible:ring-wood-500;
+  }
+
+  .btn-outline {
+    @apply btn bg-transparent text-wood-700 border-2 border-wood-300 hover:bg-wood-100 active:bg-wood-200 focus-visible:ring-wood-500;
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-wood-700 hover:bg-wood-100 active:bg-wood-200 focus-visible:ring-wood-500;
+  }
+
+  .input {
+    @apply w-full px-4 py-3 rounded-xl border border-wood-300 bg-white text-slate-900 placeholder-wood-400 transition-all duration-200 focus:border-wood-500 focus:ring-2 focus:ring-wood-500/20 focus:outline-none;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-slate-700 mb-1.5;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl overflow-hidden shadow-wood transition-all duration-300 hover:shadow-wood-lg;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-available {
+    @apply badge bg-emerald-100 text-emerald-800;
+  }
+
+  .badge-pending {
+    @apply badge bg-amber-100 text-amber-800;
+  }
+
+  .badge-sold {
+    @apply badge bg-slate-100 text-slate-600;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply py-16 sm:py-24 lg:py-30;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}

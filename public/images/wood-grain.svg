@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <defs>
+    <pattern id="woodGrain" patternUnits="userSpaceOnUse" width="400" height="400">
+      <rect width="400" height="400" fill="#f3e1d1"/>
+      <path d="M0,50 Q200,30 400,50" stroke="#e6c9b0" stroke-width="1" fill="none" opacity="0.4"/>
+      <path d="M0,100 Q200,80 400,100" stroke="#d4a884" stroke-width="0.5" fill="none" opacity="0.3"/>
+      <path d="M0,150 Q200,130 400,150" stroke="#c18a61" stroke-width="1" fill="none" opacity="0.2"/>
+      <path d="M0,200 Q200,180 400,200" stroke="#b07350" stroke-width="0.5" fill="none" opacity="0.2"/>
+      <path d="M0,250 Q200,230 400,250" stroke="#925c41" stroke-width="1" fill="none" opacity="0.15"/>
+      <path d="M0,300 Q200,280 400,300" stroke="#784b38" stroke-width="0.5" fill="none" opacity="0.1"/>
+      <path d="M0,350 Q200,330 400,350" stroke="#624031" stroke-width="1" fill="none" opacity="0.1"/>
+      <ellipse cx="150" cy="180" rx="80" ry="20" fill="none" stroke="#b07350" stroke-width="0.5" opacity="0.2"/>
+      <ellipse cx="280" cy="320" rx="60" ry="15" fill="none" stroke="#925c41" stroke-width="0.5" opacity="0.15"/>
+      <ellipse cx="80" cy="350" rx="40" ry="10" fill="none" stroke="#784b38" stroke-width="0.5" opacity="0.1"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="400" fill="url(#woodGrain)"/>
+</svg>

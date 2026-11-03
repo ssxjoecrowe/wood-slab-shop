@@ -1,0 +1,177 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+---
+
+<Layout title="About Us - Wood Slab Shop" description="Learn about Wood Slab Shop's story, our process for selecting and preparing premium wood slabs, and our commitment to sustainability.">
+  <Header />
+  <main id="main-content">
+    <section class="section bg-white" aria-labelledby="story-heading">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto text-center mb-16 lg:mb-20">
+          <h1 id="story-heading" class="font-display font-medium text-display-lg text-slate-900 mb-6">
+            Our Story
+          </h1>
+          <div class="prose prose-wood max-w-none text-slate-600 leading-relaxed text-left">
+            <p class="mb-6 text-lg">
+              Wood Slab Shop was born from a simple belief: the best furniture starts with the best wood. Founded in 2018 by master woodworker James Chen, our shop began as a personal quest to find exceptional slabs for his own commissions.
+            </p>
+            <p class="mb-6">
+              Frustrated by the inconsistency of commercial lumber yards, James started building relationships directly with sawmills, urban foresters, and landowners throughout the Pacific Northwest. What began as a side project quickly grew as fellow makers sought out his curated selection.
+            </p>
+            <p class="mb-6">
+              Today, we operate from our 5,000 sq ft facility in Portland, Oregon, where every slab is individually inspected, documented, and stored in climate-controlled conditions. We've shipped slabs to furniture makers, designers, and hobbyists across North America, but our mission remains the same: connect craftspeople with wood that inspires.
+            </p>
+            <blockquote class="border-l-4 border-wood-500 pl-6 my-8 italic text-slate-700">
+              "A great slab isn't just material—it's the protagonist of the piece. Our job is to help you find the one that tells your story."
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-wood-50" aria-labelledby="process-heading">
+      <div class="container-custom">
+        <header class="text-center max-w-2xl mx-auto mb-12 lg:mb-16">
+          <h2 id="process-heading" class="font-display font-medium text-display-lg text-slate-900 mb-4">
+            Our Process
+          </h2>
+          <p class="text-lg text-slate-600 leading-relaxed">
+            From log to your workshop—every step matters.
+          </p>
+        </header>
+
+        <div class="grid gap-8 md:grid-cols-3">
+          <article class="text-center p-6">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white flex items-center justify-center text-wood-600 shadow-wood">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="font-display font-medium text-xl text-slate-900 mb-2">Sourcing</h3>
+            <p class="text-slate-600">We partner with sustainable forestry operations, urban salvage programs, and private landowners to find exceptional logs before they reach commercial channels.</p>
+          </article>
+
+          <article class="text-center p-6">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white flex items-center justify-center text-wood-600 shadow-wood">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+            </div>
+            <h3 class="font-display font-medium text-xl text-slate-900 mb-2">Drying</h3>
+            <p class="text-slate-600">Slabs are air-dried for 12-24 months, then kiln-dried to 6-8% moisture content. We monitor every batch with digital moisture meters for consistency.</p>
+          </article>
+
+          <article class="text-center p-6">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white flex items-center justify-center text-wood-600 shadow-wood">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <h3 class="font-display font-medium text-xl text-slate-900 mb-2">Selection</h3>
+            <p class="text-slate-600">Every slab is photographed, measured, weighed, and graded. We document species, figure, defects, and moisture content so you know exactly what you're getting.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-white" aria-labelledby="sustainability-heading">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <header class="text-center mb-12 lg:mb-16">
+            <h2 id="sustainability-heading" class="font-display font-medium text-display-lg text-slate-900 mb-4">
+              Sustainability Commitment
+            </h2>
+          </header>
+
+          <div class="grid gap-8 md:grid-cols-2">
+            <div>
+              <h3 class="font-display font-medium text-xl text-slate-900 mb-4">Urban Salvage</h3>
+              <p class="text-slate-600 mb-4">
+                Over 40% of our inventory comes from urban salvage—trees removed for development, storm damage, or end-of-life in parks and streets. These trees would otherwise become mulch or firewood.
+              </p>
+              <p class="text-slate-600 mb-4">
+                We work with municipal arborists and tree services across the region to intercept quality logs before they enter the waste stream.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-display font-medium text-xl text-slate-900 mb-4">Responsible Forestry</h3>
+              <p class="text-slate-600 mb-4">
+                For non-urban wood, we source exclusively from FSC-certified forests and family-owned woodlots practicing sustainable management. We never purchase from clear-cut operations or old-growth stands.
+              </p>
+              <p class="text-slate-600 mb-4">
+                Our suppliers maintain chain-of-custody documentation from forest to our facility.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-display font-medium text-xl text-slate-900 mb-4">Zero Waste</h3>
+              <p class="text-slate-600 mb-4">
+                Offcuts and smaller pieces become turning blanks, knife scales, and sample sets. Sawdust and shavings go to local farms for animal bedding and compost. Nothing leaves our shop for the landfill.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-display font-medium text-xl text-slate-900 mb-4">Carbon Conscious</h3>
+              <p class="text-slate-600 mb-4">
+                Wood stores carbon for the life of the piece. By creating heirloom-quality furniture that lasts generations, we're keeping carbon sequestered and reducing demand for disposable furnishings.
+              </p>
+              <p class="text-slate-600 mb-4">
+                Our facility runs on 100% renewable energy through Pacific Power's Blue Sky program.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-wood-100" aria-labelledby="team-heading">
+      <div class="container-custom text-center">
+        <h2 id="team-heading" class="font-display font-medium text-display-lg text-slate-900 mb-4">
+          Meet the Team
+        </h2>
+        <p class="text-lg text-slate-600 mb-10 max-w-2xl mx-auto">
+          A small crew of wood obsessives dedicated to your craft.
+        </p>
+
+        <div class="grid gap-8 md:grid-cols-3 max-w-5xl mx-auto">
+          <article class="p-6 bg-white rounded-2xl shadow-wood">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-wood-100 flex items-center justify-center text-wood-600 overflow-hidden">
+              <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+            <h3 class="font-display font-medium text-lg text-slate-900 mb-1">James Chen</h3>
+            <p class="text-wood-600 text-sm mb-2">Founder & Head Selector</p>
+            <p class="text-slate-600 text-sm">20+ years fine furniture making. Former naval architect turned woodworker.</p>
+          </article>
+
+          <article class="p-6 bg-white rounded-2xl shadow-wood">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-wood-100 flex items-center justify-center text-wood-600 overflow-hidden">
+              <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+            <h3 class="font-display font-medium text-lg text-slate-900 mb-1">Maria Santos</h3>
+            <p class="text-wood-600 text-sm mb-2">Operations & Logistics</p>
+            <p class="text-slate-600 text-sm">Manages kiln schedules, inventory, and shipping. Keeps the shop running smoothly.</p>
+          </article>
+
+          <article class="p-6 bg-white rounded-2xl shadow-wood">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-wood-100 flex items-center justify-center text-wood-600 overflow-hidden">
+              <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+            <h3 class="font-display font-medium text-lg text-slate-900 mb-1">David Park</h3>
+            <p class="text-wood-600 text-sm mb-2">Documentation & Sales</p>
+            <p class="text-slate-600 text-sm">Photographs every slab, writes descriptions, and helps customers find the right piece.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

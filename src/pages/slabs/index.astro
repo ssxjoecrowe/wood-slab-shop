@@ -1,0 +1,98 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import SlabFilters from '@/components/SlabFilters.astro';
+import SlabCard from '@/components/SlabCard.astro';
+
+const allSlabs = await getCollection('slabs');
+
+const url = new URL(Astro.request.url);
+const speciesFilter = url.searchParams.get('species');
+const statusFilter = url.searchParams.get('status');
+const priceFilter = url.searchParams.get('price');
+const sortFilter = url.searchParams.get('sort') || 'newest';
+
+let filteredSlabs = [...allSlabs];
+
+if (speciesFilter) {
+  filteredSlabs = filteredSlabs.filter((s) => s.data.species === speciesFilter);
+}
+if (statusFilter) {
+  filteredSlabs = filteredSlabs.filter((s) => s.data.status === statusFilter);
+}
+if (priceFilter) {
+  const [min, max] = priceFilter.split('-').map(Number);
+  filteredSlabs = filteredSlabs.filter((s) => s.data.price >= min && (max === Infinity || s.data.price <= max));
+}
+
+switch (sortFilter) {
+  case 'price-asc':
+    filteredSlabs.sort((a, b) => a.data.price - b.data.price);
+    break;
+  case 'price-desc':
+    filteredSlabs.sort((a, b) => b.data.price - a.data.price);
+    break;
+  case 'species':
+    filteredSlabs.sort((a, b) => a.data.species.localeCompare(b.data.species));
+    break;
+  default:
+    filteredSlabs.sort((a, b) => new Date(b.data.createdAt || 0).getTime() - new Date(a.data.createdAt || 0).getTime());
+}
+
+const statusLabels = { available: 'Available', pending: 'Pending', sold: 'Sold' };
+const statusClasses = { available: 'badge-available', pending: 'badge-pending', sold: 'badge-sold' };
+---
+
+<Layout title="All Slabs - Wood Slab Shop" description="Browse our complete collection of premium wood slabs. Filter by species, price, dimensions, and availability.">
+  <Header />
+  <main id="main-content">
+    <section class="section bg-white" aria-labelledby="slabs-heading">
+      <div class="container-custom">
+        <header class="mb-12 lg:mb-16">
+          <h1 id="slabs-heading" class="font-display font-medium text-display-lg text-slate-900 mb-4">
+            All Slabs
+          </h1>
+          <p class="text-lg text-slate-600 max-w-2xl">
+            {filteredSlabs.length} slab{filteredSlabs.length !== 1 ? 's' : ''} found. Use the filters to narrow your search.
+          </p>
+        </header>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+          <aside class="lg:w-64 shrink-0" aria-label="Filters">
+            <SlabFilters />
+          </aside>
+
+          <div class="flex-1 min-w-0">
+            {filteredSlabs.length > 0 ? (
+              <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+                {filteredSlabs.map((slab) => (
+                  <SlabCard
+                    slug={slab.slug}
+                    title={slab.data.title}
+                    species={slab.data.species}
+                    price={slab.data.price}
+                    dimensions={slab.data.dimensions}
+                    status={slab.data.status}
+                    images={slab.data.images}
+                    featured={slab.data.featured}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div class="text-center py-16 lg:py-24">
+                <svg class="mx-auto h-16 w-16 text-wood-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h2 class="font-display font-medium text-xl text-slate-900 mb-2">No slabs found</h2>
+                <p class="text-slate-600 mb-6">Try adjusting your filters or <a href="/slabs" class="text-wood-700 underline hover:text-wood-800">view all slabs</a>.</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

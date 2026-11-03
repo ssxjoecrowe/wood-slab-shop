@@ -1,0 +1,147 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import InquiryForm from '@/components/InquiryForm.astro';
+---
+
+<Layout title="Contact Us - Wood Slab Shop" description="Get in touch with Wood Slab Shop. Ask about a specific slab, request custom milling, or inquire about wholesale pricing.">
+  <Header />
+  <main id="main-content">
+    <section class="section bg-white" aria-labelledby="contact-heading">
+      <div class="container-custom">
+        <div class="grid gap-12 lg:grid-cols-3">
+          <div class="lg:col-span-1">
+            <header class="mb-8">
+              <h1 id="contact-heading" class="font-display font-medium text-display-lg text-slate-900 mb-4">
+                Get In Touch
+              </h1>
+              <p class="text-lg text-slate-600 leading-relaxed">
+                Have questions about a slab? Need custom dimensions? Want to visit our yard? We'd love to hear from you.
+              </p>
+            </header>
+
+            <div class="space-y-6">
+              <div class="p-6 rounded-2xl bg-wood-50 border border-wood-200">
+                <h3 class="font-display font-medium text-lg text-slate-900 mb-3">Visit Our Yard</h3>
+                <address class="not-italic text-slate-600 leading-relaxed space-y-1">
+                  <p>123 Timber Lane</p>
+                  <p>Portland, OR 97201</p>
+                  <p>By appointment only</p>
+                </address>
+              </div>
+
+              <div class="p-6 rounded-2xl bg-wood-50 border border-wood-200">
+                <h3 class="font-display font-medium text-lg text-slate-900 mb-3">Call Us</h3>
+                <address class="not-italic text-slate-600 leading-relaxed space-y-1">
+                  <a href="tel:+15035550123" class="hover:text-wood-700 transition-colors">(503) 555-0123</a>
+                  <p class="text-sm">Mon–Fri, 9am–5pm PST</p>
+                </address>
+              </div>
+
+              <div class="p-6 rounded-2xl bg-wood-50 border border-wood-200">
+                <h3 class="font-display font-medium text-lg text-slate-900 mb-3">Email Us</h3>
+                <address class="not-italic text-slate-600 leading-relaxed space-y-1">
+                  <a href="mailto:hello@woodslabshop.com" class="hover:text-wood-700 transition-colors">hello@woodslabshop.com</a>
+                  <p class="text-sm">We respond within 24 hours</p>
+                </address>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-2">
+            <div class="card p-6 sm:p-8">
+              <h2 class="font-display font-medium text-xl text-slate-900 mb-6">Send a Message</h2>
+              <InquiryForm />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-wood-50" aria-labelledby="faq-heading">
+      <div class="container-custom">
+        <header class="text-center max-w-2xl mx-auto mb-12 lg:mb-16">
+          <h2 id="faq-heading" class="font-display font-medium text-display-lg text-slate-900 mb-4">
+            Frequently Asked Questions
+          </h2>
+        </header>
+
+        <div class="max-w-3xl mx-auto space-y-4">
+          <details class="group bg-white rounded-xl border border-wood-200 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+              <h3 class="font-medium text-slate-900">Do you ship slabs?</h3>
+              <svg class="w-5 h-5 text-wood-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-5 pb-5 text-slate-600 border-t border-wood-200">
+              <p>Yes, we ship throughout the US and Canada. Shipping is calculated based on dimensions, weight, and destination. We crate each slab custom for safe transit. Freight shipping typically ranges from $200–$800 depending on size and location.</p>
+            </div>
+          </details>
+
+          <details class="group bg-white rounded-xl border border-wood-200 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+              <h3 class="font-medium text-slate-900">Can I visit and hand-pick a slab?</h3>
+              <svg class="w-5 h-5 text-wood-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-5 pb-5 text-slate-600 border-t border-wood-200">
+              <p>Absolutely! We encourage it. Our yard is open by appointment Monday–Friday. Seeing the grain, color, and figure in person makes a huge difference. Schedule a visit via the contact form or call us.</p>
+            </div>
+          </details>
+
+          <details class="group bg-white rounded-xl border border-wood-200 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+              <h3 class="font-medium text-slate-900">What does "kiln-dried" mean?</h3>
+              <svg class="w-5 h-5 text-wood-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-5 pb-5 text-slate-600 border-t border-wood-200">
+              <p>Kiln drying reduces moisture content to 6–8% in a controlled environment. This prevents warping, cracking, and movement after you build with it. Air-dried slabs can take years to reach this stability; kiln drying accomplishes it in weeks with precise control.</p>
+            </div>
+          </details>
+
+          <details class="group bg-white rounded-xl border border-wood-200 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+              <h3 class="font-medium text-slate-900">Do you offer custom milling or surfacing?</h3>
+              <svg class="w-5 h-5 text-wood-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-5 pb-5 text-slate-600 border-t border-wood-200">
+              <p>We can surface plane, straight-line rip, or cut to rough dimensions for a fee. We don't do finish milling (final thickness, joinery, etc.)—that's best done in your shop after the slab acclimates. Contact us for a quote on prep work.</p>
+            </div>
+          </details>
+
+          <details class="group bg-white rounded-xl border border-wood-200 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+              <h3 class="font-medium text-slate-900">What payment methods do you accept?</h3>
+              <svg class="w-5 h-5 text-wood-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-5 pb-5 text-slate-600 border-t border-wood-200">
+              <p>We accept credit cards (via Stripe), bank transfers, and checks. For slabs over $2,000, we require a 50% deposit to hold the slab, with balance due before pickup or shipment. Payment links are sent via email.</p>
+            </div>
+          </details>
+
+          <details class="group bg-white rounded-xl border border-wood-200 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+              <h3 class="font-medium text-slate-900">What if a slab has defects?</h3>
+              <svg class="w-5 h-5 text-wood-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-5 pb-5 text-slate-600 border-t border-wood-200">
+              <p>We document all known defects (checks, knots, bark inclusions, etc.) in the description and photos. Natural character is part of the appeal. If you receive a slab with undisclosed structural defects, contact us within 48 hours for a return or credit.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

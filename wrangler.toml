@@ -1,0 +1,21 @@
+name = "wood-slab-shop"
+main = "src/worker/index.ts"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+
+[[kv_namespaces]]
+binding = "INQUIRIES_KV"
+id = "your-kv-namespace-id"
+preview_id = "your-preview-kv-namespace-id"
+
+[vars]
+ADMIN_PASSWORD = "changeme"
+STRIPE_SECRET_KEY = ""
+RESEND_API_KEY = ""
+FROM_EMAIL = "inquiries@yourdomain.com"
+TO_EMAIL = "owner@yourdomain.com"
+SITE_URL = "https://wood-slab-shop.pages.dev"

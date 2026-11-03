@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import SlabCard from '@/components/SlabCard.astro';
+
+const allSlabs = await getCollection('slabs');
+const featuredSlabs = allSlabs
+  .filter((slab) => slab.data.featured)
+  .sort((a, b) => new Date(b.data.createdAt || 0).getTime() - new Date(a.data.createdAt || 0).getTime())
+  .slice(0, 3);
+---
+
+<section aria-labelledby="featured-heading" class="section bg-white">
+  <div class="container-custom">
+    <header class="text-center max-w-2xl mx-auto mb-12 lg:mb-16">
+      <h2 id="featured-heading" class="font-display font-medium text-display-lg text-slate-900 mb-4">
+        Featured Slabs
+      </h2>
+      <p class="text-lg text-slate-600 leading-relaxed">
+        Hand-selected exceptional pieces with extraordinary grain, figure, and character.
+      </p>
+    </header>
+
+    {featuredSlabs.length > 0 && (
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {featuredSlabs.map((slab) => (
+          <SlabCard
+            slug={slab.slug}
+            title={slab.data.title}
+            species={slab.data.species}
+            price={slab.data.price}
+            dimensions={slab.data.dimensions}
+            status={slab.data.status}
+            images={slab.data.images}
+            featured={slab.data.featured}
+          />
+        ))}
+      </div>
+    )}
+
+    <div class="text-center mt-12 lg:mt-16">
+      <a href="/slabs" class="btn-secondary inline-flex">
+        View All Slabs
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,97 @@
+---
+import { getCollection, getEntryBySlug } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import ImageGallery from '@/components/ImageGallery.astro';
+import SpecsTable from '@/components/SpecsTable.astro';
+import InquiryForm from '@/components/InquiryForm.astro';
+
+export async function getStaticPaths() {
+  const slabs = await getCollection('slabs');
+  return slabs.map((slab) => ({
+    params: { slug: slab.slug },
+    props: { slab },
+  }));
+}
+
+const { slab } = Astro.props;
+const { title, species, price, dimensions, weight_lbs, moisture_pct, status, images, description } = slab.data;
+
+const statusLabels = { available: 'Available', pending: 'Pending', sold: 'Sold' };
+const statusClasses = { available: 'badge-available', pending: 'badge-pending', sold: 'badge-sold' };
+
+const canonicalURL = new URL(`/slabs/${slab.slug}`, Astro.site).toString();
+---
+
+<Layout title={`${title} - Wood Slab Shop`} description={description} canonicalURL={canonicalURL}>
+  <Header />
+  <main id="main-content">
+    <section class="section bg-white" aria-labelledby="slab-title">
+      <div class="container-custom">
+        <nav class="mb-6" aria-label="Breadcrumb">
+          <ol class="flex items-center gap-2 text-sm text-slate-500">
+            <li><a href="/" class="hover:text-wood-700 transition-colors">Home</a></li>
+            <li aria-hidden="true">/</li>
+            <li><a href="/slabs" class="hover:text-wood-700 transition-colors">Slabs</a></li>
+            <li aria-hidden="true">/</li>
+            <li aria-current="page" class="text-slate-900 font-medium">{title}</li>
+          </ol>
+        </nav>
+
+        <div class="grid gap-8 lg:grid-cols-2">
+          <div>
+            <ImageGallery images={images} title={title} />
+          </div>
+
+          <div>
+            <header class="mb-6">
+              <div class="flex flex-wrap items-center gap-3 mb-3">
+                <h1 id="slab-title" class="font-display font-medium text-display-sm text-slate-900">{title}</h1>
+                <span class={`badge ${statusClasses[status]}`}>{statusLabels[status]}</span>
+              </div>
+              <p class="text-lg text-wood-600 font-medium">{species}</p>
+            </header>
+
+            <div class="mb-6">
+              <span class="font-display font-medium text-3xl text-wood-700">${price.toLocaleString()}</span>
+            </div>
+
+            <SpecsTable
+              species={species}
+              price={price}
+              dimensions={dimensions}
+              weight_lbs={weight_lbs}
+              moisture_pct={moisture_pct}
+              status={status}
+            />
+
+            <div class="mt-6 pt-6 border-t border-wood-200">
+              <h2 class="font-display font-medium text-lg text-slate-900 mb-3">Description</h2>
+              <p class="text-slate-700 leading-relaxed">{description}</p>
+            </div>
+
+            {status === 'available' && (
+              <div class="mt-8 pt-6 border-t border-wood-200">
+                <InquiryForm presetSlab={title} />
+              </div>
+            )}
+
+            {status !== 'available' && (
+              <div class="mt-8 pt-6 border-t border-wood-200">
+                <div class="p-4 rounded-xl bg-wood-50 border border-wood-200">
+                  <p class="text-slate-700">
+                    This slab is currently <strong class="text-slate-900">{statusLabels[status].toLowerCase()}</strong>.
+                    {status === 'pending' && ' Please contact us for updates on availability.'}
+                    {status === 'sold' && ' Browse our <a href="/slabs" class="text-wood-700 underline hover:text-wood-800">other available slabs</a>.'}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

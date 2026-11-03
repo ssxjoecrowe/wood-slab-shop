@@ -1,0 +1,50 @@
+---
+interface Props {
+  species: string;
+  price: number;
+  dimensions: string;
+  weight_lbs: number;
+  moisture_pct: number;
+  status: 'available' | 'pending' | 'sold';
+}
+const { species, price, dimensions, weight_lbs, moisture_pct, status } = Astro.props;
+
+const statusLabels = { available: 'Available', pending: 'Pending', sold: 'Sold' };
+const statusClasses = { available: 'text-emerald-700 bg-emerald-50', pending: 'text-amber-700 bg-amber-50', sold: 'text-slate-600 bg-slate-100' };
+---
+
+<dl class="divide-y divide-wood-200" aria-label="Slab specifications">
+  <div class="grid grid-cols-2 gap-x-6 gap-y-4 py-4">
+    <dt class="text-slate-500">Species</dt>
+    <dd class="font-medium text-slate-900">{species}</dd>
+  </div>
+
+  <div class="grid grid-cols-2 gap-x-6 gap-y-4 py-4">
+    <dt class="text-slate-500">Price</dt>
+    <dd class="font-display font-medium text-xl text-wood-700">${price.toLocaleString()}</dd>
+  </div>
+
+  <div class="grid grid-cols-2 gap-x-6 gap-y-4 py-4">
+    <dt class="text-slate-500">Dimensions</dt>
+    <dd class="font-medium text-slate-900 font-mono text-sm">{dimensions}</dd>
+  </div>
+
+  <div class="grid grid-cols-2 gap-x-6 gap-y-4 py-4">
+    <dt class="text-slate-500">Weight</dt>
+    <dd class="font-medium text-slate-900">{weight_lbs} lbs</dd>
+  </div>
+
+  <div class="grid grid-cols-2 gap-x-6 gap-y-4 py-4">
+    <dt class="text-slate-500">Moisture Content</dt>
+    <dd class="font-medium text-slate-900">{moisture_pct}%</dd>
+  </div>
+
+  <div class="grid grid-cols-2 gap-x-6 gap-y-4 py-4">
+    <dt class="text-slate-500">Status</dt>
+    <dd class="font-medium">
+      <span class={`inline-flex items-center px-3 py-1 rounded-full text-sm ${statusClasses[status]}`}>
+        {statusLabels[status]}
+      </span>
+    </dd>
+  </div>
+</dl>

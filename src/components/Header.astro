@@ -1,0 +1,68 @@
+---
+import { Astro } from 'astro';
+const currentPath = Astro.url.pathname;
+const navigation = [
+  { href: '/', label: 'Home' },
+  { href: '/slabs', label: 'Slabs' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+  { href: '/admin', label: 'Admin' },
+];
+---
+
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-wood-200">
+  <nav class="container-custom" aria-label="Main navigation">
+    <div class="flex h-16 items-center justify-between gap-4">
+      <a href="/" class="flex items-center gap-2 shrink-0" aria-label="Wood Slab Shop Home">
+        <svg class="w-8 h-8 text-wood-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v18m14-18v18m-14-18h18m-18 6h18m-18 6h18" />
+        </svg>
+        <span class="font-display font-medium text-xl text-slate-900">Wood Slab Shop</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-1">
+        {navigation.map((item) => (
+          <a
+            href={item.href}
+            class={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))
+                ? 'bg-wood-100 text-wood-700'
+                : 'text-slate-600 hover:text-wood-700 hover:bg-wood-50'
+            }`}
+            aria-current={currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href)) ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
+
+      <button
+        class="md:hidden p-2 rounded-lg text-slate-600 hover:bg-wood-100"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="md:hidden py-4 border-t border-wood-200 animate-slide-up">
+      <div class="flex flex-col gap-1">
+        {navigation.map((item) => (
+          <a
+            href={item.href}
+            class={`px-4 py-3 rounded-lg text-base font-medium transition-colors ${
+              currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))
+                ? 'bg-wood-100 text-wood-700'
+                : 'text-slate-600 hover:text-wood-700 hover:bg-wood-50'
+            }`}
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </nav>
+</header>

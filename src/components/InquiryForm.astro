@@ -1,0 +1,150 @@
+---
+interface Props {
+  presetSlab?: string;
+}
+const { presetSlab } = Astro.props;
+---
+
+<form
+  id="inquiry-form"
+  class="space-y-6"
+  action="/api/inquire"
+  method="POST"
+  novalidate
+>
+  <div class="grid gap-6 md:grid-cols-2">
+    <div>
+      <label for="name" class="label">Full Name <span class="text-wood-500" aria-hidden="true">*</span></label>
+      <input type="text" id="name" name="name" class="input" required autocomplete="name" aria-required="true" />
+    </div>
+
+    <div>
+      <label for="email" class="label">Email <span class="text-wood-500" aria-hidden="true">*</span></label>
+      <input type="email" id="email" name="email" class="input" required autocomplete="email" aria-required="true" />
+    </div>
+
+    <div>
+      <label for="phone" class="label">Phone</label>
+      <input type="tel" id="phone" name="phone" class="input" autocomplete="tel" />
+    </div>
+
+    <div>
+      <label for="slab" class="label">Slab of Interest</label>
+      <select id="slab" name="slab" class="input">
+        <option value="">Select a slab (optional)</option>
+      </select>
+    </div>
+  </div>
+
+  <div>
+    <label for="message" class="label">Message <span class="text-wood-500" aria-hidden="true">*</span></label>
+    <textarea
+      id="message"
+      name="message"
+      rows="5"
+      class="input resize-y min-h-[120px]"
+      required
+      aria-required="true"
+      placeholder="Tell us about your project, timeline, and any questions you have..."
+    ></textarea>
+  </div>
+
+  <div class="flex items-start gap-3">
+    <input type="checkbox" id="consent" name="consent" class="mt-1 w-4 h-4 rounded border-wood-300 text-wood-600 focus:ring-wood-500 focus:ring-2" required />
+    <label for="consent" class="text-sm text-slate-600 leading-relaxed">
+      I agree to be contacted regarding this inquiry. <a href="/privacy" class="text-wood-700 underline hover:text-wood-800">Privacy Policy</a>
+    </label>
+  </div>
+
+  <button type="submit" class="btn-primary w-full sm:w-auto px-10 py-4 text-lg" id="submit-btn">
+    <span class="btn-text">Submit Inquiry</span>
+    <span class="btn-loading hidden flex items-center gap-2">
+      <svg class="animate-spin h-5 w-5" viewBox="0 0 24 24" aria-hidden="true"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/></svg>
+      Sending...
+    </span>
+  </button>
+
+  <p id="form-message" class="sr-only" aria-live="polite"></p>
+</form>
+
+<script>
+  const form = document.getElementById('inquiry-form') as HTMLFormElement;
+  const slabSelect = document.getElementById('slab') as HTMLSelectElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const btnText = submitBtn.querySelector('.btn-text') as HTMLElement;
+  const btnLoading = submitBtn.querySelector('.btn-loading') as HTMLElement;
+  const formMessage = document.getElementById('form-message') as HTMLElement;
+
+  const slabs = [
+    { value: '', label: 'Select a slab (optional)' },
+    { value: 'Black Walnut Slab #42', label: 'Black Walnut Slab #42 - $850' },
+    { value: 'White Oak Slab #17', label: 'White Oak Slab #17 - $620' },
+    { value: 'Maple Burl Slab #8', label: 'Maple Burl Slab #8 - $1,250' },
+    { value: 'Cherry Slab #33', label: 'Cherry Slab #33 - $480' },
+    { value: 'Black Walnut Slab #55', label: 'Black Walnut Slab #55 - $1,100' },
+    { value: 'Hard Maple Slab #12', label: 'Hard Maple Slab #12 - $420' },
+  ];
+
+  slabs.forEach((slab) => {
+    const option = document.createElement('option');
+    option.value = slab.value;
+    option.textContent = slab.label;
+    slabSelect.appendChild(option);
+  });
+
+  if (presetSlab) {
+    slabSelect.value = presetSlab;
+  }
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlSlab = urlParams.get('slab');
+  if (urlSlab) {
+    slabSelect.value = urlSlab;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    submitBtn.disabled = true;
+    btnText.classList.add('hidden');
+    btnLoading.classList.remove('hidden');
+    formMessage.textContent = '';
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+
+    try {
+      const response = await fetch('/api/inquire', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        formMessage.textContent = 'Thank you! Your inquiry has been submitted. We\'ll be in touch soon.';
+        formMessage.className = 'text-emerald-700';
+        form.reset();
+      } else {
+        throw new Error(result.error || 'Failed to submit inquiry');
+      }
+    } catch (error) {
+      formMessage.textContent = error instanceof Error ? error.message : 'Something went wrong. Please try again.';
+      formMessage.className = 'text-rose-700';
+    } finally {
+      submitBtn.disabled = false;
+      btnText.classList.remove('hidden');
+      btnLoading.classList.add('hidden');
+    }
+  });
+</script>
+
+<script>
+  const presetSlab = JSON.parse(`{JSON.stringify(presetSlab || '')}`);
+</script>

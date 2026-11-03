@@ -1,0 +1,336 @@
+---
+---
+
+<div id="admin-panel" class="min-h-screen bg-wood-50">
+  <header class="bg-white border-b border-wood-200 sticky top-0 z-40">
+    <div class="container-custom">
+      <div class="flex h-16 items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+          <a href="/admin" class="flex items-center gap-2 text-wood-700 hover:text-wood-900">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span class="font-display font-medium text-xl">Admin Panel</span>
+          </a>
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="/" class="btn-ghost text-sm">View Site</a>
+          <button id="logout-btn" class="btn-secondary text-sm" type="button">Sign Out</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container-custom py-8">
+    <nav class="mb-8" aria-label="Admin sections">
+      <ul class="flex flex-wrap gap-2" role="tablist">
+        <li><button role="tab" aria-selected="true" data-tab="payment-links" class="tab-btn btn-primary">Payment Links</button></li>
+        <li><button role="tab" aria-selected="false" data-tab="slab-status" class="tab-btn btn-secondary">Slab Status</button></li>
+        <li><button role="tab" aria-selected="false" data-tab="inquiries" class="tab-btn btn-secondary">Inquiries</button></li>
+      </ul>
+    </nav>
+
+    <div role="tabpanel" id="tab-payment-links" class="tab-panel">
+      <div class="card overflow-hidden">
+        <div class="p-6 border-b border-wood-200">
+          <h2 class="font-display font-medium text-xl text-slate-900">Create Stripe Payment Link</h2>
+          <p class="text-slate-600 mt-1">Generate a payment link for a specific slab</p>
+        </div>
+        <div class="p-6">
+          <form id="payment-form" class="space-y-6 max-w-xl" novalidate>
+            <div>
+              <label for="pl-slab" class="label">Select Slab</label>
+              <select id="pl-slab" name="slab" class="input" required aria-required="true">
+                <option value="">Choose a slab...</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="pl-amount" class="label">Amount (USD)</label>
+              <input type="number" id="pl-amount" name="amount" class="input" min="1" step="1" required aria-required="true" placeholder="850" />
+            </div>
+
+            <div>
+              <label for="pl-description" class="label">Description (optional)</label>
+              <textarea id="pl-description" name="description" rows="3" class="input" placeholder="Payment for Black Walnut Slab #42..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary w-full sm:w-auto" id="pl-submit">
+              <span class="btn-text">Create Payment Link</span>
+              <span class="btn-loading hidden flex items-center gap-2">
+                <svg class="animate-spin h-5 w-5" viewBox="0 0 24 24" aria-hidden="true"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/></svg>
+                Creating...
+              </span>
+            </button>
+
+            <div id="pl-result" class="hidden p-4 rounded-xl" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div role="tabpanel" id="tab-slab-status" class="tab-panel hidden">
+      <div class="card overflow-hidden">
+        <div class="p-6 border-b border-wood-200">
+          <h2 class="font-display font-medium text-xl text-slate-900">Update Slab Status</h2>
+          <p class="text-slate-600 mt-1">Change the availability status of a slab</p>
+        </div>
+        <div class="p-6">
+          <form id="status-form" class="space-y-6 max-w-xl" novalidate>
+            <div>
+              <label for="ss-slab" class="label">Select Slab</label>
+              <select id="ss-slab" name="slug" class="input" required aria-required="true">
+                <option value="">Choose a slab...</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="ss-status" class="label">New Status</label>
+              <select id="ss-status" name="status" class="input" required aria-required="true">
+                <option value="available">Available</option>
+                <option value="pending">Pending</option>
+                <option value="sold">Sold</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn-primary w-full sm:w-auto" id="ss-submit">
+              <span class="btn-text">Update Status</span>
+              <span class="btn-loading hidden flex items-center gap-2">
+                <svg class="animate-spin h-5 w-5" viewBox="0 0 24 24" aria-hidden="true"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/></svg>
+                Updating...
+              </span>
+            </button>
+
+            <div id="ss-result" class="hidden p-4 rounded-xl" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div role="tabpanel" id="tab-inquiries" class="tab-panel hidden">
+      <div class="card overflow-hidden">
+        <div class="p-6 border-b border-wood-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h2 class="font-display font-medium text-xl text-slate-900">Inquiries</h2>
+            <p class="text-slate-600 mt-1">Customer inquiries from the contact form</p>
+          </div>
+          <button id="refresh-inquiries" class="btn-secondary" type="button">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            Refresh
+          </button>
+        </div>
+        <div class="p-6">
+          <div id="inquiries-loading" class="text-center py-8 text-slate-500">
+            <svg class="animate-spin mx-auto h-8 w-8 text-wood-500 mb-2" viewBox="0 0 24 24" aria-hidden="true"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/></svg>
+            <p>Loading inquiries...</p>
+          </div>
+          <div id="inquiries-empty" class="hidden text-center py-8 text-slate-500">
+            <svg class="mx-auto h-12 w-12 text-wood-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <p>No inquiries yet</p>
+          </div>
+          <div id="inquiries-list" class="hidden divide-y divide-wood-200"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  tabBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const tab = btn.dataset.tab;
+      tabBtns.forEach((b) => {
+        b.classList.toggle('btn-primary', b.dataset.tab === tab);
+        b.classList.toggle('btn-secondary', b.dataset.tab !== tab);
+        b.setAttribute('aria-selected', b.dataset.tab === tab);
+      });
+      tabPanels.forEach((panel) => {
+        panel.classList.toggle('hidden', panel.id !== `tab-${tab}`);
+      });
+    });
+  });
+
+  async function loadSlabs() {
+    try {
+      const response = await fetch('/api/admin/slabs', { credentials: 'include' });
+      if (!response.ok) throw new Error('Failed to load slabs');
+      return await response.json();
+    } catch {
+      return [];
+    }
+  }
+
+  function populateSlabSelects(slabs: Array<{slug: string, title: string, price: number, status: string}>) {
+    const selects = ['pl-slab', 'ss-slab'];
+    selects.forEach((id) => {
+      const select = document.getElementById(id) as HTMLSelectElement;
+      if (!select) return;
+      const currentValue = select.value;
+      select.innerHTML = '<option value="">Choose a slab...</option>';
+      slabs.forEach((slab) => {
+        const option = document.createElement('option');
+        option.value = id === 'pl-slab' ? slab.title : slab.slug;
+        option.textContent = `${slab.title} - $${slab.price} (${slab.status})`;
+        select.appendChild(option);
+      });
+      select.value = currentValue;
+    });
+  }
+
+  async function initSlabs() {
+    const slabs = await loadSlabs();
+    populateSlabSelects(slabs);
+  }
+
+  document.getElementById('payment-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const submitBtn = document.getElementById('pl-submit') as HTMLButtonElement;
+    const btnText = submitBtn.querySelector('.btn-text') as HTMLElement;
+    const btnLoading = submitBtn.querySelector('.btn-loading') as HTMLElement;
+    const resultDiv = document.getElementById('pl-result') as HTMLElement;
+
+    submitBtn.disabled = true;
+    btnText.classList.add('hidden');
+    btnLoading.classList.remove('hidden');
+    resultDiv.classList.add('hidden');
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+
+    try {
+      const response = await fetch('/api/admin/payment-link', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+        credentials: 'include',
+      });
+      const result = await response.json();
+
+      if (response.ok) {
+        resultDiv.className = 'p-4 rounded-xl bg-emerald-50 border border-emerald-200';
+        resultDiv.innerHTML = `
+          <p class="font-medium text-emerald-800 mb-2">Payment link created!</p>
+          <a href="${result.url}" target="_blank" rel="noopener noreferrer" class="text-emerald-700 underline break-all">${result.url}</a>
+          <button type="button" onclick="navigator.clipboard.writeText('${result.url}')" class="mt-2 btn-ghost text-sm">Copy Link</button>
+        `;
+      } else {
+        throw new Error(result.error || 'Failed to create payment link');
+      }
+    } catch (error) {
+      resultDiv.className = 'p-4 rounded-xl bg-rose-50 border border-rose-200';
+      resultDiv.textContent = error instanceof Error ? error.message : 'Failed to create payment link';
+    } finally {
+      resultDiv.classList.remove('hidden');
+      submitBtn.disabled = false;
+      btnText.classList.remove('hidden');
+      btnLoading.classList.add('hidden');
+    }
+  });
+
+  document.getElementById('status-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const submitBtn = document.getElementById('ss-submit') as HTMLButtonElement;
+    const btnText = submitBtn.querySelector('.btn-text') as HTMLElement;
+    const btnLoading = submitBtn.querySelector('.btn-loading') as HTMLElement;
+    const resultDiv = document.getElementById('ss-result') as HTMLElement;
+
+    submitBtn.disabled = true;
+    btnText.classList.add('hidden');
+    btnLoading.classList.remove('hidden');
+    resultDiv.classList.add('hidden');
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+
+    try {
+      const response = await fetch('/api/admin/slab-status', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+        credentials: 'include',
+      });
+      const result = await response.json();
+
+      if (response.ok) {
+        resultDiv.className = 'p-4 rounded-xl bg-emerald-50 border border-emerald-200';
+        resultDiv.textContent = `Status updated to "${data.status}" for ${data.slug}`;
+        await initSlabs();
+      } else {
+        throw new Error(result.error || 'Failed to update status');
+      }
+    } catch (error) {
+      resultDiv.className = 'p-4 rounded-xl bg-rose-50 border border-rose-200';
+      resultDiv.textContent = error instanceof Error ? error.message : 'Failed to update status';
+    } finally {
+      resultDiv.classList.remove('hidden');
+      submitBtn.disabled = false;
+      btnText.classList.remove('hidden');
+      btnLoading.classList.add('hidden');
+    }
+  });
+
+  async function loadInquiries() {
+    const loading = document.getElementById('inquiries-loading');
+    const empty = document.getElementById('inquiries-empty');
+    const list = document.getElementById('inquiries-list');
+
+    loading?.classList.remove('hidden');
+    empty?.classList.add('hidden');
+    list?.classList.add('hidden');
+    list!.innerHTML = '';
+
+    try {
+      const response = await fetch('/api/admin/inquiries', { credentials: 'include' });
+      if (!response.ok) throw new Error('Failed to load inquiries');
+      const inquiries = await response.json();
+
+      loading?.classList.add('hidden');
+
+      if (!inquiries || inquiries.length === 0) {
+        empty?.classList.remove('hidden');
+        return;
+      }
+
+      list?.classList.remove('hidden');
+      inquiries.forEach((inquiry: any) => {
+        const date = new Date(inquiry.timestamp).toLocaleString();
+        const div = document.createElement('div');
+        div.className = 'p-4 hover:bg-wood-50 transition-colors';
+        div.innerHTML = `
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-2">
+            <div>
+              <p class="font-medium text-slate-900">${inquiry.name}</p>
+              <p class="text-sm text-slate-500">${inquiry.email} ${inquiry.phone ? '· ' + inquiry.phone : ''}</p>
+            </div>
+            <time class="text-sm text-wood-500 whitespace-nowrap">${date}</time>
+          </div>
+          ${inquiry.slab ? `<p class="text-sm text-slate-600 mb-2"><span class="font-medium text-wood-700">Slab:</span> ${inquiry.slab}</p>` : ''}
+          <p class="text-slate-700 whitespace-pre-wrap">${inquiry.message}</p>
+        `;
+        list!.appendChild(div);
+      });
+    } catch (error) {
+      loading?.classList.add('hidden');
+      list?.classList.remove('hidden');
+      list!.innerHTML = `<div class="p-4 text-center text-rose-700 bg-rose-50 rounded-xl">Failed to load inquiries: ${error instanceof Error ? error.message : 'Unknown error'}</div>`;
+    }
+  }
+
+  document.getElementById('refresh-inquiries')?.addEventListener('click', loadInquiries);
+
+  document.getElementById('logout-btn')?.addEventListener('click', async () => {
+    await fetch('/api/admin/logout', { method: 'POST', credentials: 'include' });
+    window.location.reload();
+  });
+
+  initSlabs();
+  loadInquiries();
+</script>
